@@ -1,0 +1,29 @@
+<div class="loading" *ngIf="!categoria">
+	Cargando...!
+</div>
+
+<div class="container-fluid mt-3" *ngIf="categoria">
+	<h1>{{categoria.nombre}}</h1>
+	<hr>
+
+	<div class="loading" *ngIf="!publicaciones">
+	Cargando listado...!
+	</div>
+
+	<div class="alert alert-warning" *ngIf="publicaciones && publicaciones.length == 0">
+		Aun no hay publicaciones en esta categoria
+	</div>
+
+	<!--Listado Publicaciones-->
+    <listado-publicaciones [publicaciones]="publicaciones"
+                            [identidad]="identidad"
+                            [url]="url"
+                            (borrarPublicacion)="borrarPublicacion($event)">
+
+    </listado-publicaciones>
+    <!--Listado Publicaciones-->
+
+	
+	
+</div>
+

@@ -1,0 +1,20 @@
+<div class="loading" *ngIf="!publicaciones">
+	Cargando...!
+</div>
+
+<div class="container-fluid mt-3" *ngIf="publicaciones">
+	<h1>{{page_title}}</h1>
+	<hr>
+
+	<!--Listado Publicaciones-->
+    <listado-publicaciones [publicaciones]="publicaciones"
+                            [identidad]="identidad"
+                            [url]="url"
+                            (borrarPublicacion)="borrarPublicacion($event)">
+
+    </listado-publicaciones>
+    <!--Listado Publicaciones-->
+	
+	
+</div>
+

@@ -1,0 +1,68 @@
+<div class="col-md-12 mt-3">
+	<h1>{{page_title}}</h1>
+	<p *ngIf="!is_editar">
+		Crea una nueva publicacion
+	</p>
+
+	<p *ngIf="is_editar && publicacion">
+		Modifica la publicacion: " {{publicacion.titulo}} "  
+	</p>
+
+	<hr>
+	<!--Mesaje Alerta -->
+	<div class="alert alert-success col-md-5 mt-3" *ngIf="status == 'success'">
+		Tu publicacion se ha creado correctamente
+	</div>
+
+	<div class="alert alert-danger col-md-5 mt-3" *ngIf="status == 'error'">
+		La publicacion no se ha creado
+	</div>
+
+	<!--FORMULARIO CREAR PUBLICACION-->
+	<form class="col-md-5 ml-0 pl-0" #nuevaPublicacion="ngForm" (ngSubmit)="onSubmit(nuevaPublicacion)">
+
+		<div class="form-group">
+			<label for="titulo">Titulo</label>
+			<input type="text" name="titulo" #titulo="ngModel" [(ngModel)]="publicacion.titulo" class="form-control" required>
+			<small *ngIf="!titulo.valid && titulo.touched" class="invalid-feedback d-block">
+				El titulo no es valido
+			</small>
+		</div>
+
+		<div class="form-group">
+			<label for="contenido">Contenido</label>
+			<textarea [froalaEditor]="opciones_froala"  name="contenido" class="form-control" #contenido="ngModel" [(ngModel)]="publicacion.contenido" [(froalaModel)]="publicacion.contenido" required></textarea>
+			<small *ngIf="!contenido.valid && contenido.touched" class="invalid-feedback d-block">
+				El contenido no es valido
+			</small>
+		</div>
+
+		<div class="form-group">
+			<label for="id_categoria">Categoria</label>
+			<select name="id_categoria" #categoria="ngModel" [(ngModel)]="publicacion.id_categoria" class="form-control">
+				<option *ngFor="let categoria of categorias" value="{{categoria.id}}">
+					{{categoria.nombre}}
+				</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label for="imagen">Imagen</label>
+
+			<div *ngIf="is_editar && publicacion.imagen">
+				<img src="{{ url + 'publicacion/imagen/' + publicacion.imagen}}" class="avatar_edit" /> 
+			</div>
+
+			<input type="file" accept="image/jpg, image/jpeg, image/png, image/gif" class="file-upload form-control" (change)="cargarImagenPublicacion($event)">
+		</div>
+
+		<br>
+
+		<input type="submit" name="Guardar" class="btn btn-success" [disabled]="nuevaPublicacion.invalid" />
+
+	</form>
+
+
+
+</div>
+

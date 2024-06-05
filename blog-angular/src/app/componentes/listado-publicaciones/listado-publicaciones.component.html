@@ -1,0 +1,66 @@
+<!--Listado de Publicaciones-->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+    <article class="col col-md-4" *ngFor="let publicacion of publicaciones">
+
+        <div class="card w-100 h-100">
+
+            <div class="card-header">
+                <h3>
+                    <a [routerLink]="['/publicacion', publicacion.id]" >
+                        {{publicacion.titulo}}
+                    </a>
+                </h3>
+            </div>
+
+            <div class="card-body">
+                <!--Imagen-->
+                <div class="publicacion-imagen w-100" *ngIf="publicacion.imagen">
+                    <img src="{{ url + 'publicacion/imagen/' + publicacion.imagen}}" class="w-100"/>
+                </div>
+
+                <div class="publicacion-imagen w-100" *ngIf="!publicacion.imagen">
+                    <img src="assets/imagenes/imagendefault.jpg" class="w-100"/>
+                </div>
+                
+                <!--Boton de accion-->
+                <div class="publicacion-boton mt-3">
+                    <a [routerLink]="['/publicacion', publicacion.id]" class="btn btn-success me-2">Leer</a>
+                    <span *ngIf="identidad && identidad.sub == publicacion.id_usuario">
+                        <a [routerLink]="['/editar-publicacion', publicacion.id]" class="btn btn-warning me-2">Editar</a>
+                        
+
+                        <!--VENTANA MODAL-->
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#myModal'+publicacion.id">
+                          Borrar
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="{{'myModal'+publicacion.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Borrar Publicacion</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                ¿está seguro que desea borrar la publicacion: "{{publicacion.titulo}}"?
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                <a (click)="quitarPublicacion(publicacion.id)" data-bs-dismiss="modal" class="btn btn-danger">Sí, Borrar</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!--FIN VENTANA MODAL-->
+                    </span>
+                </div>
+            </div>
+            
+        </div>
+
+    </article>
+
+</div>
+<!--Cierre Listado Publicaciones-->

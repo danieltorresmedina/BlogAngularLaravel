@@ -1,0 +1,48 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.avatar_edit{ 
+	width: 80px;
+	margin-bottom:10px;
+ }
+
+ .avatar_mask{
+ 	width: 40px;
+ 	height: 40px;
+ 	border-radius: 900px;
+ 	overflow: hidden;
+ }
+
+ .avatar_mask img {
+ 	height:60px;
+ }
+
+ .avatar_mask_perfil{
+	width: 75px;
+	height: 75px;
+	border-radius: 900px;
+	overflow: hidden;
+}
+
+.avatar_mask_perfil img {
+	height:100px;
+}
+
+
+ .card-header a {
+ 	color: #444;
+ }
+
+ .publicacion-imagen {
+ 	height: 200px;
+ 	overflow: hidden;
+ }
+
+ footer{
+ 	margin-top: 50px;
+ 	color: #A8A8A8	;
+ }
+
+ 

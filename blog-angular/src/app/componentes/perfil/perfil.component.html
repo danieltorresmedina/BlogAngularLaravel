@@ -1,0 +1,29 @@
+<div class="loading" *ngIf="!publicaciones">
+	Cargando...!
+</div>
+
+<hr>
+<div class="container-fluid mt-3" *ngIf="publicaciones">
+    <div id="usuario-card">
+        <div class="avatar_mask_perfil float-start me-3">
+            <img src="{{url + 'usuario/avatar/' + identidad.imagen}}" class="avatar_nav" /> 
+        </div>
+        <div class="data_mask float-start">
+            <h1>Publicaciones de {{usuario.nombre + ' ' + usuario.apellido}}  </h1>
+            <p [innerHTML]="usuario.descripcion">  </p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <hr>
+
+    <!--Listado Publicaciones-->
+    <listado-publicaciones [publicaciones]="publicaciones"
+                            [identidad]="identidad"
+                            [url]="url"
+                            (borrarPublicacion)="borrarPublicacion($event)">
+
+    </listado-publicaciones>
+    <!--Listado Publicaciones-->
+    
+</div>
+

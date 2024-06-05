@@ -1,0 +1,14 @@
+<div class="col-md-12" *ngIf="!publicacion">
+	Cargando...!
+</div>
+
+<div class="col-md-12 mt-3" *ngIf="publicacion">
+	<h1>{{publicacion.titulo}}</h1>
+	
+	<p>
+		{{publicacion.categoria.nombre}} - <a [routerLink]="['/perfil', publicacion.usuario.id]">
+		{{publicacion.usuario.nombre + ' ' + publicacion.usuario.apellido}} </a> 
+	</p>
+	<hr>
+	<p [innerHtml]="publicacion.contenido"> </p>
+</div>

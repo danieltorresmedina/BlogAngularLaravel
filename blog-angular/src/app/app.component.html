@@ -1,0 +1,71 @@
+<div class="container"> <!--CONTENEDOR PRINCIPAL-->
+<br>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="assets/imagenes/angular logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+    NG-BLOG</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/inicio" >Inicio</a>
+        </li>
+        <li class="nav-item" *ngFor="let categoria of categorias">
+          <a class="nav-link" [routerLink]="['/categoria', categoria.id]">{{categoria.nombre}}</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav navbar-right mb-2 mb-lg-0" *ngIf="!identidad.nombre">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/registro">Registrar</a>
+        </li>
+      </ul>
+
+
+      <ul class="navbar-nav navbar-right mb-2 mb-lg-0" *ngIf="identidad && identidad.nombre">
+        <li *ngIf="identidad && identidad.imagen" class="nav-item">
+          <div class="avatar_mask">
+            <img src="{{url + 'usuario/avatar/' + identidad.imagen}}" class="avatar_nav" /> 
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ identidad.nombre + ' ' + identidad.apellido }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" routerLink="/crear-publicacion">Crear Publicacion</a></li>
+              <li><a class="dropdown-item" routerLink="/crear-categoria">Crear Categoria</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" [routerLink]="['/perfil', identidad.sub]">Mi Perfil</a></li>
+              <li><a class="dropdown-item" routerLink="/ajustes">Ajustes</a></li>
+              <li><a class="dropdown-item" routerLink="/logout/1">Salir</a></li>
+            </ul>
+          </li>
+      </ul>
+
+
+
+    </div>
+  </div>
+</nav> <!--CERRAR BARRA DE NAVEGACION-->
+
+
+  <!--Contenido Principal-->  
+    <router-outlet> </router-outlet>
+
+
+
+ <footer>
+  <hr>
+   DTM'S Web Developments S.A. &copy;
+  <hr>
+ </footer>
+
+
+</div> <!--CERRAR CONTENEDOR PRINCIPAL-->

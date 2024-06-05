@@ -1,0 +1,72 @@
+<div class="col-md-12 mt-3">
+	<h1>{{page_title}}</h1>
+
+	<p *ngIf="status != 'success'">
+		Modifica tus datos personales de usuario.
+	</p>
+	<hr>
+
+
+	<div class="alert alert-success col-md-5 mt-3" *ngIf="status == 'success'">
+		Los datos se han actualizado correctamente
+	</div>
+
+	<div class="alert alert-danger col-md-5 mt-3" *ngIf="status == 'error'">
+		Los datos no se han guardado
+	</div>
+
+
+	<!--FORMULARIO AJUSTES-->
+	<form class="col-md-5 ml-0 pl-0" #editarUsuarioForm="ngForm" (ngSubmit)="onSubmit(editarUsuarioForm)">
+		<div class="form-group">
+			<label for="nombre">Nombre</label>
+			<input type="text" name="nombre" class="form-control" #name="ngModel" [(ngModel)]="usuario.nombre" required pattern="[a-zA-Z]+">
+
+			<small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+				El nombre no es valido
+			</small>
+		</div>
+
+		<div  class="form-group">
+			<label for="apellido">Apellidos</label>
+			<input type="text" name="apellido" class="form-control" #surname="ngModel" [(ngModel)]="usuario.apellido" required pattern="[a-zA-Z]+">
+
+			<small *ngIf="!surname.valid && surname.touched" class="invalid-feedback d-block">
+				Los apellidos no son validos
+			</small>
+		</div>
+
+		<div class="form-group">
+			<label for="email">Email</label>
+			<input type="email" name="email" class="form-control" #email="ngModel" [(ngModel)]="usuario.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+
+			<small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
+				El email no es valido
+			</small>
+		</div>
+
+		<div  class="form-group">
+			<label for="descripcion">Biografia</label>
+			<textarea [froalaEditor]="opciones_froala"  name="descripcion" class="form-control" #descripcion="ngModel" [(ngModel)]="usuario.descripcion" [(froalaModel)]="usuario.descripcion"></textarea>
+
+		</div>
+
+		<div  class="form-group">
+			<label for="imagen">Avatar</label>
+
+			<div *ngIf="identidad && identidad.imagen">
+				<img src="{{url + 'usuario/avatar/' + identidad.imagen}}" class="avatar_edit" /> 
+			</div>
+
+			<input type="file" accept="image/jpg, image/jpeg, image/png, image/gif" class="file-upload form-control" (change)="cargarAvatar($event)">
+
+		</div>
+
+		<br>
+		<input type="submit" value="Guardar Cambios" class="btn btn-success" [disabled]="editarUsuarioForm.invalid"/>
+	</form>
+
+
+
+</div>
+
